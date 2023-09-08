@@ -192,10 +192,10 @@ class CallkitNotificationManager(private val context: Context) {
             R.id.tvNameCaller,
             data.getString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, "")
         )
-        remoteViews.setTextViewText(
-            R.id.tvNumber,
-            data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
-        )
+//        remoteViews.setTextViewText(
+//            R.id.tvNumber,
+//            data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
+//        )
         remoteViews.setOnClickPendingIntent(
             R.id.llDecline,
             getDeclinePendingIntent(notificationId, data)
@@ -272,10 +272,10 @@ class CallkitNotificationManager(private val context: Context) {
                 R.id.tvNameCaller,
                 data.getString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, "")
             )
-            notificationViews?.setTextViewText(
-                R.id.tvNumber,
-                data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
-            )
+//            notificationViews?.setTextViewText(
+//                R.id.tvNumber,
+//                data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
+//            )
             notificationViews?.setOnClickPendingIntent(
                 R.id.llCallback,
                 getCallbackPendingIntent(notificationId, data)

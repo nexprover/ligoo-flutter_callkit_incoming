@@ -33,7 +33,6 @@ import kotlin.math.abs
 
 
 class CallkitIncomingActivity : Activity() {
-
     companion object {
 
         private const val ACTION_ENDED_CALL_INCOMING =
@@ -76,7 +75,7 @@ class CallkitIncomingActivity : Activity() {
     private lateinit var llBackgroundAnimation: RippleRelativeLayout
 
     private lateinit var tvNameCaller: TextView
-    private lateinit var tvNumber: TextView
+    //private lateinit var tvNumber: TextView
     private lateinit var ivLogo: ImageView
     private lateinit var ivAvatar: CircleImageView
 
@@ -164,7 +163,7 @@ class CallkitIncomingActivity : Activity() {
         if (data == null) finish()
 
         tvNameCaller.text = data?.getString(CallkitConstants.EXTRA_CALLKIT_NAME_CALLER, "")
-        tvNumber.text = data?.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
+        //tvNumber.text = data?.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
 
         val isShowLogo = data?.getBoolean(CallkitConstants.EXTRA_CALLKIT_IS_SHOW_LOGO, false)
         ivLogo.visibility = if (isShowLogo == true) View.VISIBLE else View.INVISIBLE
@@ -235,7 +234,7 @@ class CallkitIncomingActivity : Activity() {
         llBackgroundAnimation.startRippleAnimation()
 
         tvNameCaller = findViewById(R.id.tvNameCaller)
-        tvNumber = findViewById(R.id.tvNumber)
+        //tvNumber = findViewById(R.id.tvNumber)
         ivLogo = findViewById(R.id.ivLogo)
         ivAvatar = findViewById(R.id.ivAvatar)
 
@@ -334,7 +333,7 @@ class ApiService {
         try {
             val thread = Thread {
                 try {
-                    val (request, response, result) = Fuel.put("https://dev-api.ligoo.live/v1/public/call/${callId}")
+                    val (request, response, result) = Fuel.put("https://api.ligoo.live/v1/public/call/${callId}")
                         .response()
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
