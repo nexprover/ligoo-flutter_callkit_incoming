@@ -11,63 +11,91 @@ data class Data(val args: Map<String, Any?>) {
 
     @JsonProperty("id")
     var id: String = (args["id"] as? String) ?: ""
+
     @JsonProperty("uuid")
     var uuid: String = (args["id"] as? String) ?: ""
+
     @JsonProperty("nameCaller")
     var nameCaller: String = (args["nameCaller"] as? String) ?: ""
+
     @JsonProperty("appName")
     var appName: String = (args["appName"] as? String) ?: ""
+
     @JsonProperty("handle")
     var handle: String = (args["handle"] as? String) ?: ""
+
     @JsonProperty("avatar")
     var avatar: String = (args["avatar"] as? String) ?: ""
+
     @JsonProperty("type")
     var type: Int = (args["type"] as? Int) ?: 0
+
     @JsonProperty("duration")
-    var duration: Long = (args["duration"] as? Long) ?: ((args["duration"] as? Int)?.toLong() ?: 30000L)
+    var duration: Long =
+        (args["duration"] as? Long) ?: ((args["duration"] as? Int)?.toLong() ?: 30000L)
+
     @JsonProperty("textAccept")
     var textAccept: String = (args["textAccept"] as? String) ?: ""
+
     @JsonProperty("textDecline")
     var textDecline: String = (args["textDecline"] as? String) ?: ""
+
     @JsonProperty("extra")
     var extra: HashMap<String, Any?> =
         (args["extra"] ?: HashMap<String, Any?>()) as HashMap<String, Any?>
+
     @JsonProperty("headers")
     var headers: HashMap<String, Any?> =
         (args["headers"] ?: HashMap<String, Any?>()) as HashMap<String, Any?>
+
     @JsonProperty("from")
     var from: String = ""
 
     @JsonProperty("isCustomNotification")
     var isCustomNotification: Boolean = false
+
     @JsonProperty("isCustomSmallExNotification")
     var isCustomSmallExNotification: Boolean = false
+
     @JsonProperty("isShowLogo")
     var isShowLogo: Boolean = false
+
     @JsonProperty("ringtonePath")
     var ringtonePath: String
+
     @JsonProperty("backgroundColor")
     var backgroundColor: String
+
     @JsonProperty("backgroundUrl")
     var backgroundUrl: String
+
     @JsonProperty("actionColor")
     var actionColor: String
+
     @JsonProperty("incomingCallNotificationChannelName")
     var incomingCallNotificationChannelName: String? = null
+
     @JsonProperty("missedCallNotificationChannelName")
     var missedCallNotificationChannelName: String? = null
+
     @JsonProperty("missedNotificationId")
     var missedNotificationId: Int? = null
+
     @JsonProperty("isShowMissedCallNotification")
     var isShowMissedCallNotification: Boolean = true
+
     @JsonProperty("missedNotificationCount")
     var missedNotificationCount: Int = 1
+
     @JsonProperty("missedNotificationSubtitle")
     var missedNotificationSubtitle: String? = null
+
     @JsonProperty("missedNotificationCallbackText")
     var missedNotificationCallbackText: String? = null
+
     @JsonProperty("isShowCallback")
     var isShowCallback: Boolean = true
+
     @JsonProperty("isAccepted")
     var isAccepted: Boolean = false
 
@@ -136,6 +164,10 @@ data class Data(val args: Map<String, Any?>) {
         bundle.putBoolean(
             CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_SHOW,
             isShowMissedCallNotification
+        )
+        bundle.putBoolean(
+            CallkitConstants.IS_DEV_MODE,
+            (headers["isDev"] as Boolean?) ?: false
         )
         bundle.putInt(
             CallkitConstants.EXTRA_CALLKIT_MISSED_CALL_COUNT,
@@ -256,8 +288,8 @@ data class Data(val args: Map<String, Any?>) {
                 CallkitConstants.EXTRA_CALLKIT_ACTION_COLOR,
                 "#4CAF50"
             )
-            data.from =
-                bundle.getString(CallkitConstants.EXTRA_CALLKIT_ACTION_FROM, "")
+
+            data.from = bundle.getString(CallkitConstants.EXTRA_CALLKIT_ACTION_FROM, "")
 
             data.incomingCallNotificationChannelName = bundle.getString(
                 CallkitConstants.EXTRA_CALLKIT_INCOMING_CALL_NOTIFICATION_CHANNEL_NAME

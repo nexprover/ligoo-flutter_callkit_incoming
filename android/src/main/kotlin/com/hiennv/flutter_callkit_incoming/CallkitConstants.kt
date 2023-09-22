@@ -58,4 +58,6 @@ object CallkitConstants {
             "EXTRA_CALLKIT_MISSED_CALL_NOTIFICATION_CHANNEL_NAME"
 
     const val EXTRA_CALLKIT_ACTION_FROM = "EXTRA_CALLKIT_ACTION_FROM"
+
+    const val IS_DEV_MODE = "IS_DEV_MODE"
 }

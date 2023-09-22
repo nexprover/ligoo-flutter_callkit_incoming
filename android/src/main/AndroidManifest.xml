@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hiennv.flutter_callkit_incoming">
 
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
@@ -18,7 +19,8 @@
             android:turnScreenOn="true"
             android:configChanges="orientation"
             android:exported="true"
-            android:theme="@style/CallkitIncomingTheme">
+            android:theme="@style/CallkitIncomingTheme"
+            tools:targetApi="o_mr1">
             <intent-filter>
                 <action android:name="${applicationId}.com.hiennv.flutter_callkit_incoming.ACTION_CALL_INCOMING" />
                 <category android:name="android.intent.category.DEFAULT" />
