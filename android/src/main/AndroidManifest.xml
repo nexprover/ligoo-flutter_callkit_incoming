@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
+
     <application>
 
         <activity
@@ -18,6 +19,7 @@
             android:showOnLockScreen="true"
             android:turnScreenOn="true"
             android:configChanges="orientation"
+            android:usesCleartextTraffic="true"
             android:exported="true"
             android:theme="@style/CallkitIncomingTheme"
             tools:targetApi="o_mr1">
