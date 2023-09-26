@@ -15,12 +15,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.PowerManager
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.github.kittinunf.fuel.Fuel
 import com.hiennv.flutter_callkit_incoming.widgets.CircleTransform
 import com.squareup.picasso.OkHttp3Downloader
@@ -134,19 +136,11 @@ class CallkitNotificationManager(private val context: Context) {
                 RemoteViews(context.packageName, R.layout.layout_custom_notification)
             initNotificationViews(notificationViews!!, data)
 
-            if ((Build.MANUFACTURER.equals(
-                    "Samsung",
-                    ignoreCase = true
-                ) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) || isCustomSmallExNotification
-            ) {
-                notificationSmallViews =
-                    RemoteViews(context.packageName, R.layout.layout_custom_small_ex_notification)
-                initNotificationViews(notificationSmallViews!!, data)
-            } else {
-                notificationSmallViews =
-                    RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
-                initNotificationViews(notificationSmallViews!!, data)
-            }
+
+            notificationSmallViews =
+                RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
+            initNotificationViews(notificationSmallViews!!, data)
+
 
             notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
             notificationBuilder.setCustomContentView(notificationSmallViews)
@@ -182,6 +176,14 @@ class CallkitNotificationManager(private val context: Context) {
             ).build()
             notificationBuilder.addAction(acceptAction)
         }
+
+        val mPowerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+        val mWakeLock: PowerManager.WakeLock = mPowerManager.newWakeLock(
+            PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+            "App:IncomingCall"
+        )
+        mWakeLock.acquire(1*60*1000L /*1 minute*/)
+
         val notification = notificationBuilder.build()
         notification.flags = Notification.FLAG_INSISTENT
         getNotificationManager().notify(notificationId, notification)
