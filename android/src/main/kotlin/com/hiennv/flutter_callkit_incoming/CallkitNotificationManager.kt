@@ -141,11 +141,10 @@ class CallkitNotificationManager(private val context: Context) {
                 RemoteViews(context.packageName, R.layout.layout_custom_small_notification)
             initNotificationViews(notificationSmallViews!!, data)
 
-
-            notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
             notificationBuilder.setCustomContentView(notificationSmallViews)
             notificationBuilder.setCustomBigContentView(notificationViews)
             notificationBuilder.setCustomHeadsUpContentView(notificationSmallViews)
+            notificationBuilder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
         } else {
             val avatarUrl = data.getString(CallkitConstants.EXTRA_CALLKIT_AVATAR, "")
             if (avatarUrl != null && avatarUrl.isNotEmpty()) {
