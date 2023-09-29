@@ -360,8 +360,8 @@ class CallkitNotificationManager(private val context: Context) {
     }
 
 
-    fun clearIncomingNotification(data: Bundle, isAccepted: Boolean) {
-        context.sendBroadcast(CallkitIncomingActivity.getIntentEnded(context, isAccepted, data))
+    fun clearIncomingNotification(data: Bundle, isAccepted: Boolean, declineClicked: Boolean) {
+        context.sendBroadcast(CallkitIncomingActivity.getIntentEnded(context, isAccepted, declineClicked, data))
         notificationId = data.getString(CallkitConstants.EXTRA_CALLKIT_ID, "callkit_incoming").hashCode()
         getNotificationManager().cancel(notificationId)
     }
@@ -499,6 +499,4 @@ class CallkitNotificationManager(private val context: Context) {
             .downloader(OkHttp3Downloader(client))
             .build()
     }
-
-
 }

@@ -45,10 +45,10 @@ class CallkitIncomingActivity : Activity() {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
 
-        fun getIntentEnded(context: Context, isAccepted: Boolean, data: Bundle): Intent {
+        fun getIntentEnded(context: Context, isAccepted: Boolean, declineClicked: Boolean, data: Bundle): Intent {
             val intent = Intent("${context.packageName}.${ACTION_ENDED_CALL_INCOMING}")
             intent.putExtra("ACCEPTED", isAccepted)
-            if (!isAccepted) {
+            if (declineClicked) {
                 val callId = data.getString(CallkitConstants.EXTRA_CALLKIT_ID, "")
                 val isDev = data.getBoolean(CallkitConstants.IS_DEV_MODE)
 
@@ -56,7 +56,6 @@ class CallkitIncomingActivity : Activity() {
             }
             return intent
         }
-
     }
 
     inner class EndedCallkitIncomingBroadcastReceiver : BroadcastReceiver() {
@@ -281,8 +280,7 @@ class CallkitIncomingActivity : Activity() {
 
     private fun onAcceptClick() {
         val data = intent.extras?.getBundle(CallkitConstants.EXTRA_CALLKIT_INCOMING_DATA)
-        val acceptIntent =
-            TransparentActivity.getIntent(this, CallkitConstants.ACTION_CALL_ACCEPT, data)
+        val acceptIntent = TransparentActivity.getIntent(this, CallkitConstants.ACTION_CALL_ACCEPT, data)
         startActivity(acceptIntent)
 
         dismissKeyguard()
@@ -345,8 +343,9 @@ class CallkitIncomingActivity : Activity() {
 }
 
 class ApiService {
-    public fun sendDeclineActionToApi(callId: String?, isDev: Boolean) {
+    fun sendDeclineActionToApi(callId: String?, isDev: Boolean) {
         try {
+            Log.d("callKit:", "callRejectApi:$callId")
             val thread = Thread {
                 try {
                     var url = "https://api.ligoo.live/v1/public/call/${callId}"
