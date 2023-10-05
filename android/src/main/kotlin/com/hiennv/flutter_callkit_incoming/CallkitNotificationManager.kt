@@ -99,6 +99,7 @@ class CallkitNotificationManager(private val context: Context) {
             notificationBuilder.setCategory(NotificationCompat.CATEGORY_CALL)
             notificationBuilder.priority = NotificationCompat.PRIORITY_MAX
         }
+        Log.d("callkitDuration", getTimeOutPendingIntent(notificationId, data).toString())
         notificationBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         notificationBuilder.setOngoing(true)
         notificationBuilder.setWhen(0)
@@ -181,7 +182,7 @@ class CallkitNotificationManager(private val context: Context) {
             PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
             "App:IncomingCall"
         )
-        mWakeLock.acquire(1*60*1000L /*1 minute*/)
+        mWakeLock.acquire(2*60*1000L /*2 minute*/)
 
         val notification = notificationBuilder.build()
         notification.flags = Notification.FLAG_INSISTENT

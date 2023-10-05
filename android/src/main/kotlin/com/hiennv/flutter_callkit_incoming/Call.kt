@@ -32,7 +32,7 @@ data class Data(val args: Map<String, Any?>) {
 
     @JsonProperty("duration")
     var duration: Long =
-        (args["duration"] as? Long) ?: ((args["duration"] as? Int)?.toLong() ?: 30000L)
+        (args["duration"] as? Long) ?: ((args["duration"] as? Int)?.toLong() ?: 120000L)
 
     @JsonProperty("textAccept")
     var textAccept: String = (args["textAccept"] as? String) ?: ""
@@ -238,7 +238,7 @@ data class Data(val args: Map<String, Any?>) {
                 bundle.getString(CallkitConstants.EXTRA_CALLKIT_AVATAR, "")
             data.type = bundle.getInt(CallkitConstants.EXTRA_CALLKIT_TYPE, 0)
             data.duration =
-                bundle.getLong(CallkitConstants.EXTRA_CALLKIT_DURATION, 30000L)
+                bundle.getLong(CallkitConstants.EXTRA_CALLKIT_DURATION, 120000L)
             data.textAccept =
                 bundle.getString(CallkitConstants.EXTRA_CALLKIT_TEXT_ACCEPT, "")
             data.textDecline =

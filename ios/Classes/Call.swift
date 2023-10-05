@@ -161,7 +161,7 @@ public class Call: NSObject {
         self.handle = handle
         self.avatar = ""
         self.type = type
-        self.duration = 30000
+        self.duration = 120000
         self.extra = [:]
         self.iconName = "CallKitLogo"
         self.handleType = ""
@@ -196,7 +196,7 @@ public class Call: NSObject {
         self.handle = args["handle"] as? String ?? ""
         self.avatar = args["avatar"] as? String ?? ""
         self.type = args["type"] as? Int ?? 0
-        self.duration = args["duration"] as? Int ?? 30000
+        self.duration = args["duration"] as? Int ?? 120000
         self.extra = args["extra"] as? NSDictionary ?? [:]
         
         
